@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { Item } from "../interfaces/ItemInterface";
-import { cartItemsAtom } from "../recoil/atoms/cartItemsAtom";
+import { itemsAtom } from "../recoil/atoms/itemsAtom";
 import { useSetRecoilState } from "recoil";
 
 import "./Menu.css";
@@ -9,11 +9,11 @@ import { animateAtom } from "../recoil/atoms/animateAtom";
 const Menu: FC<{
   items: Item[];
 }> = (props) => {
-  const setCartItems = useSetRecoilState(cartItemsAtom);
+  const setItems = useSetRecoilState(itemsAtom);
   const setAnimate = useSetRecoilState(animateAtom);
 
   const handleAddToCart = (item: Item) => {
-    setCartItems((prevItems) => [...prevItems, item]);
+    setItems((prevItems) => [...prevItems, item]);
   };
 
   return (

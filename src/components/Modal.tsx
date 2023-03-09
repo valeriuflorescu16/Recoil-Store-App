@@ -1,16 +1,15 @@
 import React, { FC } from "react";
 import { useRecoilValue } from "recoil";
-import { CartItem, Item } from "../interfaces/ItemInterface";
-import { cartItemsAtom } from "../recoil/atoms/cartItemsAtom";
-import { cartItemsSelector } from "../recoil/selectors/cartItemsSelector";
+import { Item } from "../interfaces/ItemInterface";
+import { itemsAtom } from "../recoil/atoms/itemsAtom";
+import CartItems from "./CartItems";
 import "./Modal.css";
 
 const Modal: FC<{
   isOpen: boolean;
   onClose: () => void;
 }> = (props) => {
-  const cartItems: CartItem[] = useRecoilValue(cartItemsSelector);
-  const items: Item[] = useRecoilValue(cartItemsAtom);
+  const items: Item[] = useRecoilValue(itemsAtom);
 
   const total = items.reduce((sum, item) => sum + item.price, 0);
   return (
@@ -24,15 +23,7 @@ const Modal: FC<{
                 &times;
               </button>
             </div>
-            <div className="modal-body">
-              {cartItems.map((cartItem) => (
-                <div className="modal-item" key={cartItem.item.id}>
-                  <span>{cartItem.item.name}</span>
-                  <span>{cartItem.count}</span>
-                  <span>${cartItem.item.price.toFixed(2)}</span>
-                </div>
-              ))}
-            </div>
+            <CartItems />
             <div className="modal-footer">
               <span>Total:</span>
               <span>£{total.toFixed(2)}</span>

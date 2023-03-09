@@ -1,0 +1,42 @@
+.items-container {
+  margin-bottom: 20px;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.item span:nth-child(1) {
+  width: 33%;
+}
+
+.item .quantity-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 33%;
+}
+
+.item .quantity-controls button {
+  font-size: 1.2rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.item .quantity-controls span {
+  margin: 0 10px;
+}
+
+.item span:nth-child(3) {
+  width: 33%;
+  text-align: end;
+}
+
+.item .delete-button {
+  color: rgb(210, 90, 90);
+  margin-left: 1.5%;
+  cursor: pointer;
+}

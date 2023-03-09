@@ -1,11 +1,11 @@
 import { selector } from "recoil";
 import { CartItem, Item } from "../../interfaces/ItemInterface";
-import { cartItemsAtom } from "../atoms/cartItemsAtom";
+import { itemsAtom } from "../atoms/itemsAtom";
 
 export const cartItemsSelector = selector<CartItem[]>({
   key: "cartItemsSelector",
   get: ({ get }) => {
-    const items = get(cartItemsAtom);
+    const items = get(itemsAtom);
 
     const cartItemsMap = new Map<Item, number>();
 
@@ -16,6 +16,8 @@ export const cartItemsSelector = selector<CartItem[]>({
 
     const cartItems: CartItem[] = [];
     cartItemsMap.forEach((count, item) => cartItems.push({ item, count }));
+
+    cartItems.sort((a, b) => a.item.price - b.item.price);
 
     return cartItems;
   },
