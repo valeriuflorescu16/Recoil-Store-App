@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useResetRecoilState } from "recoil";
 import { Item } from "../interfaces/ItemInterface";
 import { itemsAtom } from "../recoil/atoms/itemsAtom";
 import CartItems from "./CartItems";
@@ -10,6 +10,7 @@ const Modal: FC<{
   onClose: () => void;
 }> = (props) => {
   const items: Item[] = useRecoilValue(itemsAtom);
+  const clearCart = useResetRecoilState(itemsAtom);
 
   const total = items.reduce((sum, item) => sum + item.price, 0);
   return (
@@ -23,10 +24,21 @@ const Modal: FC<{
                 &times;
               </button>
             </div>
-            <CartItems />
+            {items.length > 0 ? (
+              <CartItems />
+            ) : (
+              <p>Your shopping cart is empty!</p>
+            )}
             <div className="modal-footer">
-              <span>Total:</span>
-              <span>£{total.toFixed(2)}</span>
+              {items.length > 0 && (
+                <button className="clear-cart-btn" onClick={clearCart}>
+                  Clear Cart
+                </button>
+              )}
+              <div className="total-wrapper">
+                <span>Total:</span>
+                <span>£{total.toFixed(2)}</span>
+              </div>
             </div>
           </div>
         </div>
